@@ -1,0 +1,16 @@
+{
+    "INFO_EMPTY": "Info empty",
+    "EMAIL_EXIST": "Email existed",
+    "EMAIL_NO_VERIFY":"Email have never verify yet",
+    "SUBJECT_MAIL": "Verify account for manager aws",
+    "HTML_MAIL": "Code verify is: ",
+    "CODE_WRONG": "Code was wrong",
+    "LOGIN_FAILED": "Username or password failed",
+    "CREATE_INSTANCE_FAILED": "Check your instance info again",
+    "NOT_FOUND_INSTANCE": "Not found instance",
+    "EMAIL_WRONG": "Check your email  again",
+    "INFO_ACCOUNT_WRONG": "Check your account info again",
+    "ADD_SUCCESS": "Add success",
+    "STOP_INSTANCE_SUCCESS": "Stopping an instance",
+    "NOT_FOUND_ACCOUNT": "Not found account"
+}

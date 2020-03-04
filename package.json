@@ -1,0 +1,35 @@
+{
+  "name": "manager-aws",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "NODE_ENV=dev node app.js",
+    "test": "nyc mocha --timeout 10000",
+    "pretest": "eslint --ignore-path .gitignore . --fix",
+    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.503.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "i18n": "^0.8.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.8",
+    "nodemailer": "^6.3.0",
+    "swagger-ui-express": "^4.0.7",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^14.0.0",
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "eslint": "^6.1.0",
+    "eslint-config-strongloop": "^2.1.0",
+    "mocha": "^2.4.5",
+    "nyc": "^14.1.1"
+  }
+}

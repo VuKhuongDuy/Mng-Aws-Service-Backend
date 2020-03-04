@@ -1,0 +1,16 @@
+{
+    "INFO_EMPTY": "Hãy cung cấp cho chúng tôi đầy đủ thông tin",
+    "EMAIL_EXIST": "Email đã tồn tại, hãy dùng email khác",
+    "EMAIL_NO_VERIFY":"Email này chưa được xác nhận, hãy kiểm tra mã code chúng tôi đã gửi tới",
+    "SUBJECT_MAIL": "Xác nhận tài khoản",
+    "HTML_MAIL": "Code xác nhận là: ",
+    "CODE_WRONG": "Code xác nhận không chính xác",
+    "LOGIN_FAILED": "Tài khoản hoặc mật khẩu không đúng",
+    "CREATE_INSTANCE_FAILED": "Kiểm tra lại thông tin instance của bạn",
+    "NOT_FOUND_INSTANCE": "Không tìm thấy instance",
+    "NOT_FOUND_ACCOUNT": "Không tìm thấy account",
+    "EMAIL_WRONG": "Kiểm tra lại email của bạn",
+    "INFO_ACCOUNT_WRONG": "Kiểm tra lại thông tin account",
+    "ADD_SUCCESS": "Thêm thành công",
+    "STOP_INSTANCE_SUCCESS": "Đang dừng instance"
+}

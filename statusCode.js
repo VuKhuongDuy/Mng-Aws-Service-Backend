@@ -1,0 +1,4 @@
+exports.STATUS_SUCCESS = 200
+exports.STATUS_BADREQUEST = 400
+exports.STATUS_AUTH = 401
+exports.STATUS_ERROR = 500

@@ -1,0 +1,450 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: Manager Aws App
+basePath: /api/
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+
+paths:
+
+  /login:
+    x-swagger-router-controller: handle_login_logup
+    post:
+      operationId: check_login
+      description: check login
+      
+      parameters:
+        - name: data
+          description: username login
+          schema:
+            $ref: "#/definitions/infoLogin"
+          example: 
+            username: 'duyvu'
+            password: 'vuduy'
+          in: body
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/returnToken"
+  /logup/email:
+    x-swagger-router-controller: handle_login_logup
+    post:
+      operationId: verify_email
+      description: send a code to the email to verify
+      parameters:
+        - name: data
+          description: data registry
+          schema:
+            $ref: "#/definitions/userRegistry"
+          in: body
+          required: true
+      responses:
+        "200":
+          description: Good request.
+          schema:
+            $ref: "#/definitions/returnUser"
+        "500":
+          description: Error.
+          schema:
+            $ref: "#/definitions/returnError"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/messageAndSuccess"
+  /logup:
+    x-swagger-router-controller: handle_login_logup
+    get:
+      operationId: list_user
+      description: get list user
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/returnListUser"
+    post:
+      operationId: create_user
+      description: create a user
+      parameters:
+        - name: data
+          description: email and code to verify user
+          in: body
+          schema:
+            $ref: "#/definitions/emailAndCode"
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/returnListUser"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/messageAndSuccess"
+
+  /accountaws:
+    x-swagger-router-controller: handle_accountAWS
+    get:
+      operationId: list
+      description: lít account
+      responses:
+        "200":
+          description: "Return list account"
+          schema:
+            $ref: "#/definitions/returnListAccount"
+    delete:
+      operationId: delete_account
+      description: delete an account
+      responses:
+        "200":
+          description: "delete success an account"
+          schema:
+            $ref: "#/definitions/messageAndSuccess"
+
+  /accountaws/add:
+    x-swagger-router-controller: handle_accountAWS
+    post:
+      operationId: add
+      description: add an account
+      responses:
+        "200":
+          description: "add success an account"
+          schema:
+            $ref: "#/definitions/returnAddSuccess"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/messageAndSuccess"
+  
+  /vms:
+    x-swagger-router-controller: handle_vm
+    post:
+      operationId: listvm
+      description: get list instance
+      responses:
+        "200":
+          description: "get success"
+          schema:
+            $ref: "#/definitions/message_success_dataArray"
+        "500":
+          description: 'Error'
+          schema:
+            $ref: "#/definitions/returnError"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/returnError"    
+    delete:
+      operationId: delete_vm
+      description: delete an instance
+      responses:
+        "200":
+          description: "delete"
+          schema:
+            $ref: "#/definitions/message_success_dataObject"
+
+  /vms/create:
+    x-swagger-router-controller: handle_vm
+    post:
+      operationId: create
+      description: CREATE an instance
+      responses:
+        "200":
+          description: 'create'
+          schema: 
+            $ref: "#/definitions/messageAndSuccess"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/messageAndSuccess"
+
+  /vms/start:
+    x-swagger-router-controller: handle_vm
+    put:
+      operationId: start
+      description: Start an instance
+      responses:
+        "200":
+          description: 'Start'
+          schema: 
+            $ref: "#/definitions/message_success_dataObject"
+        "500":
+          description: Error
+          schema:
+            $ref: "#/definitions/returnError"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/message_success_dataObject"
+ 
+  /vms/stop:
+    x-swagger-router-controller: handle_vm
+    put:
+      operationId: stop
+      description: Stop an instance
+      responses:
+        "200":
+          description: 'Stop'
+          schema: 
+            $ref: "#/definitions/message_success_dataObject"
+        "500":
+          description: Error
+          schema:
+            $ref: "#/definitions/returnError"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/message_success_dataObject"          
+  
+  /make-plan:
+    x-swagger-router-controller: handle_vm
+    post:
+      operationId: makePlan
+      description: Make a plan
+      responses:
+        "200":
+          description: 'Make plan'
+          schema: 
+            $ref: "#/definitions/message_success_dataObject"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/message_success_dataObject"  
+
+  /plans:
+    x-swagger-router-controller: handle_vm
+    get:
+      operationId: listPlan
+      description: Get list plan
+      responses:
+        "200":
+          description: 'Make plan'
+          schema: 
+            $ref: "#/definitions/message_success_dataArray"
+   
+  /delete-plan:
+    delete:
+      operationId: deletePlan
+      description: Delete plan
+      responses:
+        "200":
+          description: 'Delete successful plan'
+          schema: 
+            $ref: "#/definitions/messageAndSuccess"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/messageAndSuccess"  
+
+# securityDefinitions:
+#   authentication:
+#     type: apiKey
+#     name: Authorization
+#     in: header
+
+securityDefinitions:
+  JWT:
+    description: ""
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+
+
+security:
+  - JWT: []
+
+definitions:
+
+  emailAndCode:
+    type: object
+    properties:
+      email:
+        type: string
+      code:
+        type: string
+
+  userRegistry:
+    type: object
+    properties:
+      username:
+        type: string
+        default: 'dfsad'
+      password:
+        type: string
+      email:
+        type: string
+
+  returnToken:
+    type: object
+    properties:
+      token:
+        type: string
+        description: token for author
+    required:
+      - token
+
+  returnListUser:
+    type: object
+    properties:
+      success:
+        type: string
+        description: true if success
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/user_schema"
+
+  infoLogin:
+    type: object
+    properties:
+      username:
+        type: string
+        description: username
+      password:
+        type: string
+        description: password
+
+  returnUser:
+    type: object
+    properties:
+      success:
+        type: string
+        description: true if send success a code to email
+      user:
+        $ref: "#/definitions/user_schema"
+
+  returnListAccount:
+    type: object
+    properties:
+      success:
+        type: string
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/account_schema"
+  
+  messageAndSuccess:
+    type: object
+    properties:
+      success:
+        type: string
+      message:
+        type: string
+    required:
+      - success
+
+  message_success_dataArray:
+    type: object
+    properties:
+      success:
+        type: string
+      data:
+        type: array
+      message:
+        type: string
+    required:
+      - success
+
+  message_success_dataObject:
+    type: object
+    properties:
+      success:
+        type: string
+      data:
+        type: object
+      message:
+        type: string
+    required:
+      - success
+
+  returnAddSuccess:
+    type: object
+    properties:
+      success:
+        type: string
+      message:
+        type: string
+      data:
+        type: object
+        properties:
+          name:
+            type: string
+          region:
+            type: string
+    required:
+      - success
+
+  returnError:
+    type: object
+    properties:
+      success:
+        type: string
+      error:
+        type: object
+
+  user_schema:
+    type: object
+    properties:
+      _id:
+        type: string
+      username:
+        type: string
+      password:
+        type: string
+      email:
+        type: string
+      active:
+        type: boolean
+      code:
+        type: string
+
+  account_schema:
+    type: object
+    properties:
+      _id:
+        type: string
+      user:
+        $ref: "#/definitions/user_schema"
+      name:
+        type: string
+      accessKeyId:
+        type: string
+      secretAccessKey:
+        type: string
+      region:
+        type: string
+      running:
+        type: number
+      countInstance:
+        type: number
+
+  plan_schema:
+    type: object
+    properties:
+      _id:
+        type: string
+      user:
+        $ref: "#/definitions/user_schema"
+      typePlan:
+        type: string
+      valueObjectPlan:
+        type: string
+      dateTime:
+        type: string
+        format: date
+      date:
+        type: string
+      time:
+        type: string
+      action:
+        type: string
+      schedule:
+        type: string
